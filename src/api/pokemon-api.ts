@@ -6,7 +6,15 @@ export async function fetchPokemons(limit = 12) {
     if(!response.ok) throw new Error("Failed to fetch Pokémon list");
 
     const data = await response.json();
-    const selected = data.results.sort(() => Math.random() - 0.5).slice(0, limit); // shuffling and then selecting 
+    const results = data.results;
+
+    // Fisher-Yates Shuffle
+    for (let i = results.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [results[i], results[j]] = [results[j], results[i]];
+    }
+
+    const selected = results.slice(0, limit); 
 
     const pokemonPromises = selected.map(async (pokemon: { name: string; url: string }) => {
       const detailResponse = await fetch(pokemon.url)
