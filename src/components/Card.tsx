@@ -5,7 +5,7 @@ interface PokemonCardProps {
   onClick: () => void;
 }
 
-export default function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
+export default function Card({ pokemon, onClick }: PokemonCardProps) {
   return (
     <div onClick={onClick}>
       <div>
