@@ -57,30 +57,30 @@ export default function MemoryGame() {
 
   if (loading) {
     return (
-      <div>
-        <div></div>
-        <p>Loading Pokémon...</p>
+      <div className="flex flex-col items-center justify-center min-h-[80vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+        <p className="mt-4 text-white text-xl">Loading Pokémon...</p>
       </div>
     )
   }
 
   else if (error) {
     return (
-      <div>
+      <div className="flex flex-col items-center justify-center min-h-[80vh]">
         {/* tells screen readers to immediately announce the error */}
-        <div role="alert">  
-          <strong>Error! </strong>
-          <span>{error}</span>
+        <div role="alert" className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">  
+          <strong className="font-bold">Error! </strong>
+          <span className="block sm:inline">{error}</span>
         </div>
       </div>
     )
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Header currentScore={currentScore} bestScore={bestScore} />
 
-      <div>
+      <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full max-w-4xl">
         {pokemons.map((pokemon) => (
           <Card key={pokemon.id} pokemon={pokemon} onClick={() => handleCardClick(pokemon.id)} />
         ))}
